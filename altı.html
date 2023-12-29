@@ -1,0 +1,126 @@
+<!-- Add your chart code here -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- AdminLTE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css"
+      integrity="sha512-IuO+tczf4J43RzbCMEFggCWW5JuX78IrCJRFFBoQEXNvGI6gkUw4OjuwMidiS4Lm9Q2lILzpJwZuMWuSEeT9UQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <canvas id="salesChart" width="800" height="400"></canvas>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Verileri tanımlayın
+        var months = ["ocak", "şubat", "mart", "nisan", "mayıs", "haziran"];
+
+        // Chart.js ile çizgi grafiği oluşturma
+        var ctx = document.getElementById("salesChart").getContext("2d");
+        var myChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: months,
+            datasets: [
+              {
+                label: "Sayılar",
+                data: [], // Verileri burada boş bırakıyoruz ve AJAX isteği ile dolduracağız
+                backgroundColor: "rgba(54, 162, 235, 0.2)", // Arkaplan rengi (isteğe bağlı)
+                borderColor: "rgba(54, 162, 235, 1)", // Çizgi rengi
+                borderWidth: 2,
+                pointBackgroundColor: "rgba(54, 162, 235, 1)", // Nokta rengi
+                pointRadius: 5,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+        // AJAX isteği yapma
+        $.ajax({
+          url: "http://localhost:3000/api/tahminiSatis/",
+          method: "GET",
+          success: function (response) {
+            if (response.success) {
+              var data = response.data;
+
+              // Veritabanından gelen en son ayı alın
+              var lastMonth = months[months.length - 1]; // Örneğin: "Mayıs"
+
+              // En son ayı bir Date nesnesine dönüştürün
+              var monthNames = [
+                "Ocak",
+                "Şubat",
+                "Mart",
+                "Nisan",
+                "Mayıs",
+                "Haziran",
+                "Temmuz",
+                "Ağustos",
+                "Eylül",
+                "Ekim",
+                "Kasım",
+                "Aralık",
+              ];
+              // var lastMonthNumber = monthNames.indexOf(lastMonth);
+              // var lastMonthYear = data.u_mayis_24 ? 2024 : 2023; // Veritabanından gelen yılı alın
+              // var lastMonthDate = new Date(lastMonthYear, lastMonthNumber);
+
+              // // En son aydan 6 ve 12 ay sonrasını hesaplayın
+              // var sixMonthsLater = new Date(
+              //   lastMonthDate.setMonth(lastMonthDate.getMonth() + 6)
+              // );
+              // var twelveMonthsLater = new Date(
+              //   lastMonthDate.setMonth(lastMonthDate.getMonth() + 6)
+              // );
+
+              // // Ay isimlerini ve yılları hesaplayın
+              // var sixMonthsLaterName =
+              //   monthNames[sixMonthsLater.getMonth()] +
+              //   " " +
+              //   sixMonthsLater.getFullYear();
+              // var twelveMonthsLaterName =
+              //   monthNames[twelveMonthsLater.getMonth()] +
+              //   " " +
+              //   twelveMonthsLater.getFullYear();
+
+              // // Ay isimlerini ve tahmini perform
+              // ansları grafiğe ekleyin
+              // myChart.data.labels.push(
+              //   sixMonthsLaterName,
+              //   twelveMonthsLaterName
+              // );
+              myChart.data.datasets[0].data = data.map(
+                (entry) => entry.avg_sales
+              );
+
+              myChart.update(); // Grafiği güncelle
+            }
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

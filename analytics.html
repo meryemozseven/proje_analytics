@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap 4 -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- AdminLTE CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css"
+      integrity="sha512-IuO+tczf4J43RzbCMEFggCWW5JuX78IrCJRFFBoQEXNvGI6gkUw4OjuwMidiS4Lm9Q2lILzpJwZuMWuSEeT9UQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- AdminLTE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/js/adminlte.min.js"></script>
+    <!-- chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- AdminLTE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css"
+      integrity="sha512-IuO+tczf4J43RzbCMEFggCWW5JuX78IrCJRFFBoQEXNvGI6gkUw4OjuwMidiS4Lm9Q2lILzpJwZuMWuSEeT9UQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      #bellButton {
+        position: relative;
+      }
+
+      #notificationCount {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 12px;
+        padding: 2px 6px;
+        border-radius: 50%;
+        background-color: red;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-light navbar-dark">
+      <div class="container">
+        <a href="index.html" class="navbar-brand">
+          <span class="fa fa-home"> </span>
+        </a>
+        <!-- Left navbar links -->
+
+        <!-- SEARCH FORM -->
+        <form class="form-inline ml-3">
+          <div class="input-group input-group-sm">
+            <input
+              class="form-control form-control-navbar"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-navbar" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Notifications Dropdown Menu -->
+          <li class="nav-item">
+            <div class="accordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                    id="bellButton"
+                  >
+                    <i class="far fa-bell"></i>
+                    <span
+                      id="notificationCount"
+                      class="badge badge-warning navbar-badge"
+                      >8</span
+                    >
+                  </button>
+                </h2>
+                <div
+                  id="collapseOne"
+                  class="accordion-collapse collapse"
+                  data-bs-parent=".accordion"
+                >
+                  <div class="accordion-body">
+                    <ul id="stokAzalanUrunListesi"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- /.navbar -->
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <!-- <a href="index3.html" class="brand-link">
+              <img
+                src="dist/img/AdminLTELogo.png"
+                alt="AdminLTE Logo"
+                class="brand-image img-circle elevation-3"
+                style="opacity: 0.8"
+              />
+              <span class="brand-text font-weight-light">AdminLTE 3</span>
+            </a> -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div>
+          <h1 style="margin: 10px">
+            <span style="color: rgb(255, 157, 0)">Dash</span
+            ><span style="color: white">board</span>
+          </h1>
+        </div>
+        <!-- Sidebar user panel (optional) -->
+        <form class="form-inline">
+          <div class="input-group">
+            <input
+              class="form-control form-control-sidebar"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-sidebar" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img
+              src="userr.jpg"
+              class="img-circle elevation-2"
+              alt="User Image"
+            />
+          </div>
+          <div>
+            <p style="margin: 15px; color: aliceblue">
+              Ava
+              <span style="color: rgb(255, 200, 0)">Mitchel</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul
+            class="nav nav-pills nav-sidebar flex-column"
+            data-widget="treeview"
+            role="menu"
+          >
+            <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+            <li class="nav-item menu-open">
+              <a href="index.html" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Starter Pages
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-chart-line nav-icon"></i>
+                    <p>Analytics</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="tedarik.html" class="nav-link">
+                    <i class="fas fa-industry nav-icon"></i>
+
+                    <p>Suppliers</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/urun.html" class="nav-link">
+                    <i class="fas fa-cube nav-icon"></i>
+
+                    <p>Products</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="envanter.html" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Envanter
+                  <span class="right badge badge-danger">New</span>
+                </p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <div class="container" style="margin-top: 50px; margin-left: 300px">
+      <div class="row">
+        <div class="col-md-6">
+          <canvas id="myPieChart" width="250" height="250"></canvas>
+        </div>
+        <div class="col-md-6">
+          <canvas id="azsatan" width="250" height="250"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-left: 340px; margin-right: 80px">
+      <!-- ... (diğer HTML kodları) ... -->
+
+      <div class="col-6">
+        <select id="salesIncreaseSelect" onchange="updateChart()">
+          <option value="normal">Normal Sales</option>
+          <option value="increase">Increased Sales (20%)</option>
+          <option value="decrease">Decreased Sales (20%)</option>
+          <option value="increaseon">Increased Sales (10%)</option>
+          <option value="decreaseon">Decreased Sales (10%)</option>
+        </select>
+
+        <canvas id="salesChart" width="800" height="400"></canvas>
+        <p>Satış Performansı: 6 Ay Öngörüsü</p>
+      </div>
+      <div class="col-6">
+        <canvas
+          id="dokuzChart"
+          width="800"
+          height="400"
+          style="margin-top: 23px"
+        ></canvas>
+        <p>Satış Performansı: 9 Ay Öngörüsü</p>
+      </div>
+    </div>
+
+    <script>
+      function updateChart() {
+        var selectElement = document.getElementById("salesIncreaseSelect");
+        var selectedValue = selectElement.value;
+
+        if (selectedValue === "increase") {
+          window.location.href = "fazla.html";
+        } else if (selectedValue === "decrease") {
+          window.location.href = "az.html";
+        } else if (selectedValue === "increaseon") {
+          window.location.href = "yuzdeonfazla.html";
+        } else if (selectedValue === "decreaseon") {
+          window.location.href = "yuzdeonaz.html";
+        }
+        // Normal satış seçeneği için başka bir işlem yapmak isterseniz buraya ekleyebilirsiniz.
+      }
+    </script>
+
+    <!-- sonn -->
+
+    <script>
+      ///for ajax
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Verileri tanımlayın
+        var months = ["ocak", "şubat", "mart", "nisan", "mayıs", "haziran"];
+
+        // Chart.js ile çizgi grafiği oluşturma
+        var ctx = document.getElementById("salesChart").getContext("2d");
+        var myChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: months,
+            datasets: [
+              {
+                label: "Sayılar",
+                data: [], // Verileri burada boş bırakıyoruz ve AJAX isteği ile dolduracağız
+                backgroundColor: "rgba(54, 162, 235, 0.2)", // Arkaplan rengi (isteğe bağlı)
+                borderColor: "rgba(54, 162, 235, 1)", // Çizgi rengi
+                borderWidth: 2,
+                pointBackgroundColor: "rgba(54, 162, 235, 1)", // Nokta rengi
+                pointRadius: 5,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+        // AJAX isteği yapma
+        $.ajax({
+          url: "http://localhost:3000/api/tahminiSatis/",
+          method: "GET",
+          success: function (response) {
+            if (response.success) {
+              var data = response.data;
+
+              // Veritabanından gelen en son ayı alın
+              var lastMonth = months[months.length - 1]; // Örneğin: "Mayıs"
+
+              // En son ayı bir Date nesnesine dönüştürün
+              var monthNames = [
+                "Ocak",
+                "Şubat",
+                "Mart",
+                "Nisan",
+                "Mayıs",
+                "Haziran",
+                "Temmuz",
+                "Ağustos",
+                "Eylül",
+                "Ekim",
+                "Kasım",
+                "Aralık",
+              ];
+
+              myChart.data.datasets[0].data = data.map(
+                (entry) => entry.avg_sales
+              );
+
+              myChart.update(); // Grafiği güncelle
+            }
+          },
+        });
+      });
+      ///9ay
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Verileri tanımlayın
+        var months = [
+          "ocak",
+          "şubat",
+          "mart",
+          "nisan",
+          "mayıs",
+          "haziran",
+          "temmuz",
+          "ağustos",
+          "eylül",
+        ];
+
+        // Chart.js ile çizgi grafiği oluşturma
+        var ctx = document.getElementById("salestwoChart").getContext("2d");
+        var myChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: months,
+            datasets: [
+              {
+                label: "Sayılar",
+                data: [], // Verileri burada boş bırakıyoruz ve AJAX isteği ile dolduracağız
+                backgroundColor: "rgba(54, 162, 235, 0.2)", // Arkaplan rengi (isteğe bağlı)
+                borderColor: "rgba(54, 162, 235, 1)", // Çizgi rengi
+                borderWidth: 2,
+                pointBackgroundColor: "rgba(54, 162, 235, 1)", // Nokta rengi
+                pointRadius: 5,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+        // AJAX isteği yapma
+        $.ajax({
+          url: "http://localhost:3000/api/tahminiDokuzSatis/",
+          method: "GET",
+          success: function (response) {
+            if (response.success) {
+              var data = response.data;
+
+              // Veritabanından gelen en son ayı alın
+              var lastMonth = months[months.length - 1]; // Örneğin: "Mayıs"
+
+              // En son ayı bir Date nesnesine dönüştürün
+              var monthNames = [
+                "Ocak",
+                "Şubat",
+                "Mart",
+                "Nisan",
+                "Mayıs",
+                "Haziran",
+                "Temmuz",
+                "Ağustos",
+                "Eylül",
+                "Ekim",
+                "Kasım",
+                "Aralık",
+              ];
+
+              myChart.data.datasets[0].data = data.map(
+                (entry) => entry.avg_sales
+              );
+
+              myChart.update(); // Grafiği güncelle
+            }
+          },
+        });
+      });
+      ////yuzdeyirmialti
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Verileri tanımlayın
+        var months = [
+          "ocak",
+          "şubat",
+          "mart",
+          "nisan",
+          "mayıs",
+          "haziran",
+          "temmuz",
+          "ağustos",
+          "eylül",
+        ];
+
+        // Chart.js ile çizgi grafiği oluşturma
+        var ctx = document.getElementById("dokuzChart").getContext("2d");
+        var myChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: months,
+            datasets: [
+              {
+                label: "Sayılar",
+                data: [], // Verileri burada boş bırakıyoruz ve AJAX isteği ile dolduracağız
+                backgroundColor: "rgba(54, 162, 235, 0.2)", // Arkaplan rengi (isteğe bağlı)
+                borderColor: "rgba(54, 162, 235, 1)", // Çizgi rengi
+                borderWidth: 2,
+                pointBackgroundColor: "rgba(54, 162, 235, 1)", // Nokta rengi
+                pointRadius: 5,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+        // AJAX isteği yapma
+        $.ajax({
+          url: "http://localhost:3000/api/tahminiDokuzSatis/",
+          method: "GET",
+          success: function (response) {
+            if (response.success) {
+              var data = response.data;
+
+              // Veritabanından gelen en son ayı alın
+              var lastMonth = months[months.length - 1]; // Örneğin: "Mayıs"
+
+              // En son ayı bir Date nesnesine dönüştürün
+              var monthNames = [
+                "Ocak",
+                "Şubat",
+                "Mart",
+                "Nisan",
+                "Mayıs",
+                "Haziran",
+                "Temmuz",
+                "Ağustos",
+                "Eylül",
+                "Ekim",
+                "Kasım",
+                "Aralık",
+              ];
+              // var lastMonthNumber = monthNames.indexOf(lastMonth);
+              // var lastMonthYear = data.u_mayis_24 ? 2024 : 2023; // Veritabanından gelen yılı alın
+              // var lastMonthDate = new Date(lastMonthYear, lastMonthNumber);
+
+              // // En son aydan 6 ve 12 ay sonrasını hesaplayın
+              // var sixMonthsLater = new Date(
+              //   lastMonthDate.setMonth(lastMonthDate.getMonth() + 6)
+              // );
+              // var twelveMonthsLater = new Date(
+              //   lastMonthDate.setMonth(lastMonthDate.getMonth() + 6)
+              // );
+
+              // // Ay isimlerini ve yılları hesaplayın
+              // var sixMonthsLaterName =
+              //   monthNames[sixMonthsLater.getMonth()] +
+              //   " " +
+              //   sixMonthsLater.getFullYear();
+              // var twelveMonthsLaterName =
+              //   monthNames[twelveMonthsLater.getMonth()] +
+              //   " " +
+              //   twelveMonthsLater.getFullYear();
+
+              // // Ay isimlerini ve tahmini perform
+              // ansları grafiğe ekleyin
+              // myChart.data.labels.push(
+              //   sixMonthsLaterName,
+              //   twelveMonthsLaterName
+              // );
+              myChart.data.datasets[0].data = data.map(
+                (entry) => entry.avg_sales
+              );
+
+              myChart.update(); // Grafiği güncelle
+            }
+          },
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Chart.js ile pie chart oluşturma
+        var ctx = document.getElementById("azsatan").getContext("2d");
+        var azsatan;
+
+        // AJAX isteği yapma
+        $.ajax({
+          url: "http://localhost:3000/api/azsatan",
+          method: "GET",
+          success: function (response) {
+            if (response.success) {
+              var data = response.data;
+
+              // Pie chart için veri hazırlığı
+              var labels = [];
+              var dataValues = [];
+              var backgroundColors = [];
+
+              // Only keep the first 5 items, group the rest into 'other'
+              var slicedData = data.slice(0, 5);
+              var otherData = data.slice(5);
+
+              slicedData.forEach((entry) => {
+                labels.push(entry.urun_adi);
+                dataValues.push(entry.toplam_miktar);
+                // Assign a different color for each 'aciklama'
+                backgroundColors.push(getRandomColor());
+              });
+
+              // Group 'other'
+              if (otherData.length > 0) {
+                var otherTotal = otherData.reduce(
+                  (acc, entry) => acc + entry.toplam_miktar,
+                  0
+                );
+                labels.push("Other");
+                dataValues.push(otherTotal);
+                backgroundColors.push(getRandomColor());
+              }
+
+              // Oluşturulan pie chart'ın kontrolünü sağlama
+              if (azsatan) {
+                // Eğer chart varsa, verileri güncelle
+                azsatan.data.labels = labels;
+                azsatan.data.datasets[0].data = dataValues;
+                azsatan.data.datasets[0].backgroundColor = backgroundColors;
+                azsatan.update();
+              } else {
+                // Eğer chart yoksa, yeni bir pie chart oluştur
+                azsatan = new Chart(ctx, {
+                  type: "pie",
+                  data: {
+                    labels: labels,
+                    datasets: [
+                      {
+                        data: dataValues,
+                        backgroundColor: backgroundColors,
+                        borderColor: "rgba(255, 255, 255, 1)",
+                        borderWidth: 1,
+                      },
+                    ],
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                  },
+                });
+              }
+            }
+          },
+        });
+
+        function getRandomColor() {
+          var letters = "0123456789ABCDEF";
+          var color = "#";
+          for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+          }
+          return color;
+        }
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Chart.js ile pie chart oluşturma
+        var ctx = document.getElementById("myPieChart").getContext("2d");
+        var myPieChart;
+
+        // AJAX isteği yapma
+        $.ajax({
+          url: "http://localhost:3000/api/pieChartVeriGetir",
+          method: "GET",
+          success: function (response) {
+            if (response.success) {
+              var data = response.data;
+
+              // Pie chart için veri hazırlığı
+              var labels = [];
+              var dataValues = [];
+              var backgroundColors = [];
+
+              // Only keep the first 5 items, group the rest into 'other'
+              var slicedData = data.slice(0, 5);
+              var otherData = data.slice(5);
+
+              slicedData.forEach((entry) => {
+                labels.push(entry.urun_adi);
+                dataValues.push(entry.toplam_miktar);
+                // Assign a different color for each 'aciklama'
+                backgroundColors.push(getRandomColor());
+              });
+
+              // Group 'other'
+              if (otherData.length > 0) {
+                var otherTotal = otherData.reduce(
+                  (acc, entry) => acc + entry.toplam_miktar,
+                  0
+                );
+                labels.push("Other");
+                dataValues.push(otherTotal);
+                backgroundColors.push(getRandomColor());
+              }
+
+              // Oluşturulan pie chart'ın kontrolünü sağlama
+              if (myPieChart) {
+                // Eğer chart varsa, verileri güncelle
+                myPieChart.data.labels = labels;
+                myPieChart.data.datasets[0].data = dataValues;
+                myPieChart.data.datasets[0].backgroundColor = backgroundColors;
+                myPieChart.update();
+              } else {
+                // Eğer chart yoksa, yeni bir pie chart oluştur
+                myPieChart = new Chart(ctx, {
+                  type: "pie",
+                  data: {
+                    labels: labels,
+                    datasets: [
+                      {
+                        data: dataValues,
+                        backgroundColor: backgroundColors,
+                        borderColor: "rgba(255, 255, 255, 1)",
+                        borderWidth: 1,
+                      },
+                    ],
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                  },
+                });
+              }
+            }
+          },
+        });
+
+        function getRandomColor() {
+          var letters = "0123456789ABCDEF";
+          var color = "#";
+          for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+          }
+          return color;
+        }
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        // Bell ikonuna tıklama olayını dinle
+        $("#bellButton").on("click", function () {
+          // Accordion'u açıp/kapat
+          $("#collapseOne").collapse("toggle");
+        });
+
+        // Accordion başlığına tıklama olayını dinle
+        $("#accordionHeader").on("click", function () {
+          // Accordion'u kapat
+          $("#collapseOne").collapse("hide");
+        });
+      });
+
+      $(document).ready(function () {
+        // Bell ikonuna tıklama olayını dinle
+        $("#bellButton").on("click", function () {
+          // Stok azalan ürünleri accordion içine ekle
+          $.ajax({
+            url: "http://localhost:3000/api/stokAz", // Değiştirilmesi gereken API endpoint'i
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+              // Accordion içindeki liste öğelerini temizle
+              $("#stokAzalanUrunListesi").empty();
+
+              // Stok azalan ürünleri accordion içindeki liste öğelerine ekle
+              $.each(response, function (index, item) {
+                $("#stokAzalanUrunListesi").append(
+                  `<li>${item.envanter_id} - Stok: ${item.stok_miktari}</li>`
+                );
+              });
+
+              // Bildirim sayısını güncelle
+              var notificationCount = response.length;
+              $("#notificationCount").text(notificationCount);
+
+              // Accordion'u aç
+              // $("#collapseOne").addClass("show");
+            },
+            error: function (error) {
+              console.error("Stok azalan ürünleri getirme hatası:", error);
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

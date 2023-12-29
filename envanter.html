@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap 4 -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- AdminLTE CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css"
+      integrity="sha512-IuO+tczf4J43RzbCMEFggCWW5JuX78IrCJRFFBoQEXNvGI6gkUw4OjuwMidiS4Lm9Q2lILzpJwZuMWuSEeT9UQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- AdminLTE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/js/adminlte.min.js"></script>
+    <!-- chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- AdminLTE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css"
+      integrity="sha512-IuO+tczf4J43RzbCMEFggCWW5JuX78IrCJRFFBoQEXNvGI6gkUw4OjuwMidiS4Lm9Q2lILzpJwZuMWuSEeT9UQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      .wrapper {
+        margin-top: 56px; /* Navbar yüksekliği kadar boşluk bırak */
+        margin-left: 400px; /* Sidebar genişliği kadar boşluk bırak */
+        width: 2000px;
+      }
+      #bellButton {
+        position: relative;
+      }
+
+      #notificationCount {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 12px;
+        padding: 2px 6px;
+        border-radius: 50%;
+        background-color: red;
+        color: white;
+      }
+    </style>
+  </head>
+  <body class="dark-mode">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-light navbar-dark">
+      <div class="container">
+        <a href="index.html" class="navbar-brand">
+          <span class="fa fa-home"> </span>
+        </a>
+        <!-- Left navbar links -->
+
+        <!-- SEARCH FORM -->
+        <form class="form-inline ml-3">
+          <div class="input-group input-group-sm">
+            <input
+              class="form-control form-control-navbar"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-navbar" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Notifications Dropdown Menu -->
+          <li class="nav-item">
+            <div class="accordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                    id="bellButton"
+                  >
+                    <i class="far fa-bell"></i>
+                    <span
+                      id="notificationCount"
+                      class="badge badge-warning navbar-badge"
+                      >8</span
+                    >
+                  </button>
+                </h2>
+                <div
+                  id="collapseOne"
+                  class="accordion-collapse collapse"
+                  data-bs-parent=".accordion"
+                >
+                  <div class="accordion-body">
+                    <ul id="stokAzalanUrunListesi"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- /.navbar -->
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <!-- <a href="index3.html" class="brand-link">
+              <img
+                src="dist/img/AdminLTELogo.png"
+                alt="AdminLTE Logo"
+                class="brand-image img-circle elevation-3"
+                style="opacity: 0.8"
+              />
+              <span class="brand-text font-weight-light">AdminLTE 3</span>
+            </a> -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div>
+          <h1 style="margin: 10px">
+            <span style="color: rgb(255, 157, 0)">Dash</span
+            ><span style="color: white">board</span>
+          </h1>
+        </div>
+        <!-- Sidebar user panel (optional) -->
+        <form class="form-inline">
+          <div class="input-group">
+            <input
+              class="form-control form-control-sidebar"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-sidebar" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img
+              src="userr.jpg"
+              class="img-circle elevation-2"
+              alt="User Image"
+            />
+          </div>
+          <div>
+            <p style="margin: 15px">
+              Ava
+              <span style="color: rgb(255, 200, 0)">Mitchel</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul
+            class="nav nav-pills nav-sidebar flex-column"
+            data-widget="treeview"
+            role="menu"
+          >
+            <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+            <li class="nav-item menu-open">
+              <a href="index.html" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Starter Pages
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="analytics.html" class="nav-link">
+                    <i class="fas fa-chart-line nav-icon"></i>
+                    <p>Analytics</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="tedarik.html" class="nav-link">
+                    <i class="fas fa-industry nav-icon"></i>
+
+                    <p>Suppliers</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/urun.html" class="nav-link">
+                    <i class="fas fa-cube nav-icon"></i>
+
+                    <p>Products</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="envanter.html" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Envanter
+                  <span class="right badge badge-danger">New</span>
+                </p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <div class="wrapper">
+      <div class="m-auto">
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Envanter</h3>
+            </div>
+            <div class="card-body">
+              <table class="table table-bordered" id="urunlerTable">
+                <thead>
+                  <tr>
+                    <th>Envanter ID</th>
+                    <th>İl ID</th>
+                    <th>İl Adı</th>
+                    <th>Ürün ID</th>
+                    <th>Stok Miktarı</th>
+                  </tr>
+                </thead>
+                <tbody id="urunlerTableBody">
+                  <!-- Tablo verileri buraya eklenecek -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        function envanterGetir() {
+          $.ajax({
+            url: "http://localhost:3000/api/envanterGetir",
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+              if (Array.isArray(response) && response.length > 0) {
+                // Clear existing table rows
+                $("#urunlerTableBody").empty();
+
+                // Append new rows
+                $.each(response, function (index, item) {
+                  // Determine arrow color and direction based on stok_miktari
+                  var arrowClass, arrowDirection;
+                  if (item.stok_miktari < 1000) {
+                    arrowClass = "text-danger";
+                    arrowDirection = "fa-arrow-down";
+                  } else if (
+                    item.stok_miktari >= 1000 &&
+                    item.stok_miktari <= 2000
+                  ) {
+                    arrowClass = "text-muted";
+                    arrowDirection = "fa-arrow-right";
+                  } else {
+                    arrowClass = "text-success";
+                    arrowDirection = "fa-arrow-up";
+                  }
+
+                  var row = `<tr>
+                                    <td>${item.envanter_id}</td>
+                                    <td>${item.il_id}</td>
+                                    <td>${item.il_ad}</td>
+                                    <td>${item.urun_id}</td>
+                                    <td>
+                                        <span class="${arrowClass} mr-1">
+                                            <i class="fas ${arrowDirection}"></i>
+                                        </span>
+                                        ${item.stok_miktari}
+                                    </td>
+                                </tr>`;
+                  $("#urunlerTableBody").append(row);
+                });
+              } else {
+                console.error(
+                  "Unexpected response format or empty data:",
+                  response
+                );
+              }
+            },
+            error: function (error) {
+              console.error("Veri çekme hatası:", error);
+            },
+          });
+        }
+
+        // Call the function to fetch and display data
+        envanterGetir();
+
+        // Enable Bootstrap tooltips and popovers
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
+
+        // Enable Bootstrap dropdowns
+        $(".heh").dropdown();
+
+        // Enable sidebar toggling
+        $('[data-widget="pushmenu"]').on("click", function () {
+          $("body").toggleClass("sidebar-collapse");
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        // Bell ikonuna tıklama olayını dinle
+        $("#bellButton").on("click", function () {
+          // Accordion'u açıp/kapat
+          $("#collapseOne").collapse("toggle");
+        });
+
+        // Accordion başlığına tıklama olayını dinle
+        $("#accordionHeader").on("click", function () {
+          // Accordion'u kapat
+          $("#collapseOne").collapse("hide");
+        });
+      });
+
+      $(document).ready(function () {
+        // Bell ikonuna tıklama olayını dinle
+        $("#bellButton").on("click", function () {
+          // Stok azalan ürünleri accordion içine ekle
+          $.ajax({
+            url: "http://localhost:3000/api/stokAz", // Değiştirilmesi gereken API endpoint'i
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+              // Accordion içindeki liste öğelerini temizle
+              $("#stokAzalanUrunListesi").empty();
+
+              // Stok azalan ürünleri accordion içindeki liste öğelerine ekle
+              $.each(response, function (index, item) {
+                $("#stokAzalanUrunListesi").append(
+                  `<li>${item.envanter_id} - Stok: ${item.stok_miktari}</li>`
+                );
+              });
+
+              // Bildirim sayısını güncelle
+              var notificationCount = response.length;
+              $("#notificationCount").text(notificationCount);
+
+              // Accordion'u aç
+              // $("#collapseOne").addClass("show");
+            },
+            error: function (error) {
+              console.error("Stok azalan ürünleri getirme hatası:", error);
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

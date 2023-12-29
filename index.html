@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/qgis2web.css" />
+    <link rel="stylesheet" href="css/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="css/leaflet-search.css" />
+    <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css" />
+    <link rel="stylesheet" href="css/leaflet-measure.css" />
+    <!-- Bootstrap 4 -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- AdminLTE CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css"
+      integrity="sha512-IuO+tczf4J43RzbCMEFggCWW5JuX78IrCJRFFBoQEXNvGI6gkUw4OjuwMidiS4Lm9Q2lILzpJwZuMWuSEeT9UQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- AdminLTE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/js/adminlte.min.js"></script>
+    <!-- chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+      /* Genel stil kuralları */
+
+      .accordion {
+        margin-bottom: 0; /* Accordion'un altındaki boşluğu kaldır */
+        color: #fff;
+      }
+
+      /* Düzeltilmiş bildirim ikonu ve sayısı */
+
+      #map {
+        /* margin-left: 600px;
+        width: 800px;
+        height: 400px; */
+        background-color: black;
+      }
+
+      #bellButton {
+        position: relative;
+        background-color: #222d32;
+        color: #fff;
+      }
+
+      #notificationCount {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 12px;
+        padding: 2px 6px;
+        border-radius: 50%;
+        background-color: red;
+        color: white;
+      }
+      #stokAzalanUrunListesi li {
+        list-style-type: none;
+      }
+    </style>
+    <script>
+      jQuery(document).ready(function () {
+        function katSayi() {
+          $.ajax({
+            url: "http://localhost:3000/api/katSaySorgusu",
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+              // Check if the response is an array with at least one element
+              if (Array.isArray(response) && response.length > 0) {
+                // Access the first element of the array
+                var firstElement = response[0];
+
+                // Check if tedarikci_sayisi property exists in the first element
+                if (firstElement.categoryCount !== undefined) {
+                  $("#categoriSayi").text(firstElement.categoryCount);
+                } else {
+                  console.error("Unexpected response format:", response);
+                }
+              } else {
+                console.error("Unexpected response format:", response);
+              }
+            },
+            error: function (error) {
+              console.error("Error fetching data:", error);
+            },
+          });
+        }
+
+        katSayi();
+      });
+    </script>
+    <script>
+      jQuery(document).ready(function () {
+        function productSayi() {
+          $.ajax({
+            url: "http://localhost:3000/api/productSaySorgusu",
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+              // Check if the response is an array with at least one element
+              if (Array.isArray(response) && response.length > 0) {
+                // Access the first element of the array
+                var firstElement = response[0];
+
+                // Check if tedarikci_sayisi property exists in the first element
+                if (firstElement.productCount !== undefined) {
+                  $("#productSayi").text(firstElement.productCount);
+                } else {
+                  console.error("Unexpected response format:", response);
+                }
+              } else {
+                console.error("Unexpected response format:", response);
+              }
+            },
+            error: function (error) {
+              console.error("Error fetching data:", error);
+            },
+          });
+        }
+
+        productSayi();
+      });
+    </script>
+    <script>
+      jQuery(document).ready(function () {
+        function satisSayi() {
+          $.ajax({
+            url: "http://localhost:3000/api/satisSaySorgusu",
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+              // Check if the response is an array with at least one element
+              if (Array.isArray(response) && response.length > 0) {
+                // Access the first element of the array
+                var firstElement = response[0];
+
+                // Check if tedarikci_sayisi property exists in the first element
+                if (firstElement.satisCount !== undefined) {
+                  $("#satisSayi").text(firstElement.satisCount);
+                } else {
+                  console.error("Unexpected response format:", response);
+                }
+              } else {
+                console.error("Unexpected response format:", response);
+              }
+            },
+            error: function (error) {
+              console.error("Error fetching data:", error);
+            },
+          });
+        }
+
+        satisSayi();
+      });
+    </script>
+    <script>
+      jQuery(document).ready(function () {
+        function userSayi() {
+          $.ajax({
+            url: "http://localhost:3000/api/userSaySorgusu",
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+              // Check if the response is an array with at least one element
+              if (Array.isArray(response) && response.length > 0) {
+                // Access the first element of the array
+                var firstElement = response[0];
+
+                // Check if tedarikci_sayisi property exists in the first element
+                if (firstElement.userCount !== undefined) {
+                  $("#userSayi").text(firstElement.userCount);
+                } else {
+                  console.error("Unexpected response format:", response);
+                }
+              } else {
+                console.error("Unexpected response format:", response);
+              }
+            },
+            error: function (error) {
+              console.error("Error fetching data:", error);
+            },
+          });
+        }
+
+        userSayi();
+      });
+    </script>
+    <title></title>
+  </head>
+  <body class="">
+    <!-- yeni -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-light navbar-dark">
+      <div class="container">
+        <a href="index.html" class="navbar-brand">
+          <span class="fa fa-home"> </span>
+        </a>
+        <!-- Left navbar links -->
+
+        <!-- SEARCH FORM -->
+        <form class="form-inline ml-3">
+          <div class="input-group input-group-sm">
+            <input
+              class="form-control form-control-navbar"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-navbar" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Notifications Dropdown Menu -->
+          <li class="nav-item">
+            <div class="accordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                    id="bellButton"
+                  >
+                    <i class="far fa-bell"></i>
+                    <span
+                      id="notificationCount"
+                      class="badge badge-warning navbar-badge"
+                      >8</span
+                    >
+                  </button>
+                </h2>
+                <div
+                  id="collapseOne"
+                  class="accordion-collapse collapse"
+                  data-bs-parent=".accordion"
+                >
+                  <div class="accordion-body">
+                    <ul id="stokAzalanUrunListesi"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-widget="control-sidebar"
+              data-slide="true"
+              href="envanter.html"
+              role="button"
+              id="openEnvanterPage"
+              ><i class="fas fa-th-large"></i
+            ></a>
+          </li>
+        </ul>
+        <!-- tjlarge -->
+        <script>
+          // Bu kodu ekleyin
+          $(document).ready(function () {
+            $("#openEnvanterPage").on("click", function (e) {
+              e.preventDefault(); // Varsayılan tıklama davranışını engelle
+              window.location.href = "envanter.html"; // Yeni sayfaya yönlendir
+            });
+          });
+        </script>
+      </div>
+    </nav>
+    <!-- /.navbar -->
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <!-- <a href="index3.html" class="brand-link">
+            <img
+              src="dist/img/AdminLTELogo.png"
+              alt="AdminLTE Logo"
+              class="brand-image img-circle elevation-3"
+              style="opacity: 0.8"
+            />
+            <span class="brand-text font-weight-light">AdminLTE 3</span>
+          </a> -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div>
+          <h1 style="margin: 10px; color: #fff">
+            <span style="color: rgb(255, 157, 0)">Dash</span>board
+          </h1>
+        </div>
+        <!-- Sidebar user panel (optional) -->
+        <form class="form-inline">
+          <div class="input-group">
+            <input
+              class="form-control form-control-sidebar"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-sidebar" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img
+              src="userr.jpg"
+              class="img-circle elevation-2"
+              alt="User Image"
+            />
+          </div>
+          <div>
+            <p style="color: #fff; margin: 15px">
+              Ava
+              <span style="color: rgb(255, 200, 0)">Mitchel</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul
+            class="nav nav-pills nav-sidebar flex-column"
+            data-widget="treeview"
+            role="menu"
+          >
+            <!-- Add icons to the links using the .nav-icon class
+                   with font-awesome or any other icon font library -->
+            <li class="nav-item menu-open">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Starter Pages
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="analytics.html" class="nav-link">
+                    <i class="fas fa-industry nav-icon"></i>
+
+                    <p>Analytics</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="tedarik.html" class="nav-link">
+                    <i class="fas fa-industry nav-icon"></i>
+
+                    <p>Suppliers</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/urun.html" class="nav-link">
+                    <i class="fas fa-cube nav-icon"></i>
+
+                    <p>Products</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="envanter.html" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Envanter
+                  <span class="right badge badge-danger">New</span>
+                </p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+    <div
+      class="row"
+      style="width: 1100px; margin-left: 300px; margin-top: 20px"
+    >
+      <!-- index.html -->
+
+      <!-- index.html -->
+
+      <div class="col-md-3">
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3 id="categoriSayi"></h3>
+            <p>Categories</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-folder"></i>
+          </div>
+          <a href="#" class="small-box-footer">
+            More info <i class="fas fa-arrow-circle-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-3" style="text-color: #fff">
+        <div class="small-box bg-warning">
+          <div class="inner" style="color: #fff">
+            <h3 id="productSayi"></h3>
+            <p>Products</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-tag"></i>
+          </div>
+          <a href="#" class="small-box-footer" style="color: #fff">
+            More info <i class="fas fa-arrow-circle-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="small-box bg-secondary">
+          <div class="inner">
+            <h3 id="satisSayi">150</h3>
+            <p>Sales</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-shopping-cart"></i>
+          </div>
+          <a href="#" class="small-box-footer">
+            More info <i class="fas fa-arrow-circle-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="small-box bg-gradient-success">
+          <div class="inner">
+            <h3 id="userSayi">44</h3>
+            <p>Users</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <a href="#" class="small-box-footer">
+            More info <i class="fas fa-arrow-circle-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div
+      class="row"
+      style="margin-left: 300px; margin-right: 150px; height: 350px"
+    >
+      <div class="col-4">
+        <canvas id="salesChart" width="800" height="600"></canvas>
+        <h6>sales(past 6 months)</h6>
+      </div>
+
+      <div id="map" class="col-8"><h1 style="margin-left: 60px">map</h1></div>
+    </div>
+
+    <script src="js/qgis2web_expressions.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet.rotatedMarker.js"></script>
+    <script src="js/leaflet.pattern.js"></script>
+    <script src="js/leaflet-hash.js"></script>
+    <script src="js/Autolinker.min.js"></script>
+    <script src="js/rbush.min.js"></script>
+    <script src="js/labelgun.min.js"></script>
+    <script src="js/labels.js"></script>
+    <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+    <script src="js/leaflet-measure.js"></script>
+    <script src="js/leaflet-search.js"></script>
+    <script src="data/ybs2014_vize_iller_0.js"></script>
+    <script>
+      var map = L.map("map", {
+        zoomControl: true,
+        maxZoom: 28,
+        minZoom: 1,
+      }).fitBounds([
+        [31.27232748547886, 24.069722524473974],
+        [45.54718653756691, 44.84683002066302],
+      ]);
+      var hash = new L.Hash(map);
+      map.attributionControl.setPrefix(
+        '<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>'
+      );
+      var autolinker = new Autolinker({
+        truncate: { length: 30, location: "smart" },
+      });
+      var measureControl = new L.Control.Measure({
+        position: "topleft",
+        primaryLengthUnit: "feet",
+        secondaryLengthUnit: "miles",
+        primaryAreaUnit: "sqfeet",
+        secondaryAreaUnit: "sqmiles",
+      });
+      measureControl.addTo(map);
+      document.getElementsByClassName(
+        "leaflet-control-measure-toggle"
+      )[0].innerHTML = "";
+      document.getElementsByClassName(
+        "leaflet-control-measure-toggle"
+      )[0].className += " fas fa-ruler";
+      var bounds_group = new L.featureGroup([]);
+      function setBounds() {}
+      function pop_ybs2014_vize_iller_0(feature, layer) {
+        var popupContent =
+          '<table>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["ID"] !== null
+            ? autolinker.link(feature.properties["ID"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["IL"] !== null
+            ? autolinker.link(feature.properties["IL"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["YERLESIMKO"] !== null
+            ? autolinker.link(feature.properties["YERLESIMKO"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["ADI"] !== null
+            ? autolinker.link(feature.properties["ADI"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["Shape_Leng"] !== null
+            ? autolinker.link(feature.properties["Shape_Leng"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["Shape_Area"] !== null
+            ? autolinker.link(feature.properties["Shape_Area"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["NUFUS_2000"] !== null
+            ? autolinker.link(feature.properties["NUFUS_2000"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["bolge"] !== null
+            ? autolinker.link(feature.properties["bolge"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["_iller2"] !== null
+            ? autolinker.link(feature.properties["_iller2"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["_n2000"] !== null
+            ? autolinker.link(feature.properties["_n2000"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["_n2022"] !== null
+            ? autolinker.link(feature.properties["_n2022"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["fark"] !== null
+            ? autolinker.link(feature.properties["fark"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["oran"] !== null
+            ? autolinker.link(feature.properties["oran"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["oran2"] !== null
+            ? autolinker.link(feature.properties["oran2"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' +
+          (feature.properties["sayi"] !== null
+            ? autolinker.link(feature.properties["sayi"].toLocaleString())
+            : "") +
+          '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">supply_management — envanter_iller_il_id</th>\
+                        <td>' +
+          (feature.properties["supply_management — envanter_iller_il_id"] !==
+          null
+            ? autolinker.link(
+                feature.properties[
+                  "supply_management — envanter_iller_il_id"
+                ].toLocaleString()
+              )
+            : "") +
+          "</td>\
+                    </tr>\
+                </table>";
+        layer.bindPopup(popupContent, { maxHeight: 400 });
+      }
+
+      function style_ybs2014_vize_iller_0_0(feature) {
+        switch (
+          String(feature.properties["supply_management — envanter_iller_il_id"])
+        ) {
+          case "2039":
+            return {
+              pane: "pane_ybs2014_vize_iller_0",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(247,251,255,1.0)",
+              interactive: true,
+            };
+            break;
+          case "3837":
+            return {
+              pane: "pane_ybs2014_vize_iller_0",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(175,209,231,1.0)",
+              interactive: true,
+            };
+            break;
+          case "13581":
+            return {
+              pane: "pane_ybs2014_vize_iller_0",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(62,142,196,1.0)",
+              interactive: true,
+            };
+            break;
+          default:
+            return {
+              pane: "pane_ybs2014_vize_iller_0",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(8,48,107,1.0)",
+              interactive: true,
+            };
+            break;
+          case "1387":
+            return {
+              pane: "pane_ybs2014_vize_iller_0",
+              opacity: 1,
+              color: "rgba(35,35,35,1.0)",
+              dashArray: "",
+              lineCap: "butt",
+              lineJoin: "miter",
+              weight: 1.0,
+              fill: true,
+              fillOpacity: 1,
+              fillColor: "rgba(133,182,111,1.0)",
+              interactive: true,
+            };
+            break;
+        }
+      }
+      map.createPane("pane_ybs2014_vize_iller_0");
+      map.getPane("pane_ybs2014_vize_iller_0").style.zIndex = 400;
+      map.getPane("pane_ybs2014_vize_iller_0").style["mix-blend-mode"] =
+        "normal";
+      var layer_ybs2014_vize_iller_0 = new L.geoJson(
+        json_ybs2014_vize_iller_0,
+        {
+          attribution: "",
+          interactive: true,
+          dataVar: "json_ybs2014_vize_iller_0",
+          layerName: "layer_ybs2014_vize_iller_0",
+          pane: "pane_ybs2014_vize_iller_0",
+          onEachFeature: pop_ybs2014_vize_iller_0,
+          style: style_ybs2014_vize_iller_0_0,
+        }
+      );
+      bounds_group.addLayer(layer_ybs2014_vize_iller_0);
+      map.addLayer(layer_ybs2014_vize_iller_0);
+      var osmGeocoder = new L.Control.Geocoder({
+        collapsed: true,
+        position: "topleft",
+        text: "Search",
+        title: "Testing",
+      }).addTo(map);
+      document.getElementsByClassName(
+        "leaflet-control-geocoder-icon"
+      )[0].className += " fa fa-search";
+      document.getElementsByClassName(
+        "leaflet-control-geocoder-icon"
+      )[0].title += "Search for a place";
+      setBounds();
+      map.addControl(
+        new L.Control.Search({
+          layer: layer_ybs2014_vize_iller_0,
+          initial: false,
+          hideMarkerOnCollapse: true,
+          propertyName: "Shape_Area",
+        })
+      );
+      document.getElementsByClassName("search-button")[0].className +=
+        " fa fa-binoculars";
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- AdminLTE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/js/adminlte.min.js"></script>
+    <!-- chart -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Verileri tanımlayın
+        var months = ["Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+
+        // Chart.js ile çizgi grafiği oluşturma
+        var ctx = document.getElementById("salesChart").getContext("2d");
+        var myChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: months,
+            datasets: [
+              {
+                label: "Sayılar",
+                data: [], // Verileri burada boş bırakıyoruz ve AJAX isteği ile dolduracağız
+                backgroundColor: "rgba(54, 162, 235, 0.2)", // Arkaplan rengi (isteğe bağlı)
+                borderColor: "rgba(54, 162, 235, 1)", // Çizgi rengi
+                borderWidth: 2,
+                pointBackgroundColor: "rgba(54, 162, 235, 1)", // Nokta rengi
+                pointRadius: 5,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+
+        // AJAX isteği yapma
+        $.ajax({
+          url: "http://localhost:3000/api/altiAySatis/",
+          method: "GET",
+          success: function (response) {
+            if (response.success) {
+              var data = response.data;
+
+              // Veritabanından gelen verileri grafik verilerine ekle
+              myChart.data.datasets[0].data = data.map(
+                (entry) => entry.aylik_satis
+              );
+
+              myChart.update(); // Grafiği güncelle
+            }
+          },
+        });
+      });
+    </script>
+
+    <!-- belllllllll -->
+    <script>
+      $(document).ready(function () {
+        function envanterGetir() {
+          $.ajax({
+            url: "http://localhost:3000/api/stokAz",
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+              if (Array.isArray(response) && response.length > 0) {
+                // Clear existing table rows
+                $("#urunlerTableBody").empty();
+
+                // Append new rows
+                $.each(response, function (index, item) {
+                  // Determine arrow color and direction based on stok_miktari
+                  var arrowClass, arrowDirection;
+                  if (item.stok_miktari < 1000) {
+                    arrowClass = "text-danger";
+                    arrowDirection = "fa-arrow-down";
+                  } else if (
+                    item.stok_miktari >= 1000 &&
+                    item.stok_miktari <= 2000
+                  ) {
+                    arrowClass = "text-muted";
+                    arrowDirection = "fa-arrow-right";
+                  } else {
+                    arrowClass = "text-success";
+                    arrowDirection = "fa-arrow-up";
+                  }
+
+                  var row = `<tr>
+                                  <td>${item.envanter_id}</td>
+                                  <td>${item.il_id}</td>
+                                  <td>${item.il_ad}</td>
+                                  <td>${item.urun_id}</td>
+                                  <td>
+                                      <span class="${arrowClass} mr-1">
+                                          <i class="fas ${arrowDirection}"></i>
+                                      </span>
+                                      ${item.stok_miktari}
+                                  </td>
+                              </tr>`;
+                  $("#urunlerTableBody").append(row);
+                });
+              } else {
+                console.error(
+                  "Unexpected response format or empty data:",
+                  response
+                );
+              }
+            },
+            error: function (error) {
+              console.error("Veri çekme hatası:", error);
+            },
+          });
+        }
+
+        // Call the function to fetch and display data
+        envanterGetir();
+
+        // Enable Bootstrap tooltips and popovers
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
+
+        // Enable Bootstrap dropdowns
+        $(".heh").dropdown();
+
+        // Enable sidebar toggling
+        $('[data-widget="pushmenu"]').on("click", function () {
+          $("body").toggleClass("sidebar-collapse");
+        });
+
+        // Bell ikonuna tıklama olayını dinle
+        $("#bellButton").on("click", function () {
+          // Accordion'u açıp/kapat
+          $("#collapseOne").collapse("toggle");
+        });
+
+        // Accordion başlığına tıklama olayını dinle
+        $("#accordionHeader").on("click", function () {
+          // Accordion'u kapat
+          $("#collapseOne").collapse("hide");
+        });
+
+        // Bell ikonuna tıklama olayını dinle
+        $("#bellButton").on("click", function () {
+          // Stok azalan ürünleri accordion içine ekle
+          $.ajax({
+            url: "http://localhost:3000/api/stokAz", // Değiştirilmesi gereken API endpoint'i
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+              // Accordion içindeki liste öğelerini temizle
+              $("#stokAzalanUrunListesi").empty();
+
+              // Stok azalan ürünleri accordion içindeki liste öğelerine ekle
+              $.each(response, function (index, item) {
+                $("#stokAzalanUrunListesi").append(
+                  `<li><i class="fas fa-exclamation-circle" style="color: red;"></i> ürün:${item.urun_ad} - envanter:${item.il_ad}- Stok: ${item.stok_miktari}</li>`
+                );
+              });
+
+              // Bildirim sayısını güncelle
+              var notificationCount = response.length;
+              $("#notificationCount").text(notificationCount);
+
+              // Accordion'u aç
+              // $("#collapseOne").addClass("show");
+            },
+            error: function (error) {
+              console.error("Stok azalan ürünleri getirme hatası:", error);
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
