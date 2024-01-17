@@ -137,18 +137,6 @@
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
-      <!-- <a href="index3.html" class="brand-link">
-              <img
-                src="dist/img/AdminLTELogo.png"
-                alt="AdminLTE Logo"
-                class="brand-image img-circle elevation-3"
-                style="opacity: 0.8"
-              />
-              <span class="brand-text font-weight-light">AdminLTE 3</span>
-            </a> -->
-
-      <!-- Sidebar -->
       <div class="sidebar">
         <div>
           <h1 style="margin: 10px">
@@ -195,8 +183,6 @@
             data-widget="treeview"
             role="menu"
           >
-            <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
               <a href="index.html" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -250,8 +236,6 @@
         class="row"
         style="margin-left: 340px; margin-right: 80px; margin-top: 50px"
       >
-        <!-- ... (diğer HTML kodları) ... -->
-
         <div class="col-6">
           <select id="salesIncreaseSelect" onchange="updateChart()">
             <option value="normal">Normal Sales</option>
@@ -289,7 +273,7 @@
     <!-- sonn -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Verileri tanımlayın
+        // Verileri tanımla
         var months = [
           "ocak",
           "şubat",
@@ -302,7 +286,7 @@
           "eylül",
         ];
 
-        // Chart.js ile çizgi grafiği oluşturma
+        // Chart.js ile çizgi grafiği oluştur
         var ctx = document.getElementById("salesdokuz").getContext("2d");
         var myChart = new Chart(ctx, {
           type: "line",
@@ -336,10 +320,10 @@
             if (response.success) {
               var data = response.data;
 
-              // Veritabanından gelen en son ayı alın
+              // Veritabanından gelen en son ayı al
               var lastMonth = months[months.length - 1]; // Örneğin: "Mayıs"
 
-              // En son ayı bir Date nesnesine dönüştürün
+              // En son ayı bir Date nesnesine dönüştür
               var monthNames = [
                 "Ocak",
                 "Şubat",
@@ -354,34 +338,7 @@
                 "Kasım",
                 "Aralık",
               ];
-              // var lastMonthNumber = monthNames.indexOf(lastMonth);
-              // var lastMonthYear = data.u_mayis_24 ? 2024 : 2023; // Veritabanından gelen yılı alın
-              // var lastMonthDate = new Date(lastMonthYear, lastMonthNumber);
 
-              // // En son aydan 6 ve 12 ay sonrasını hesaplayın
-              // var sixMonthsLater = new Date(
-              //   lastMonthDate.setMonth(lastMonthDate.getMonth() + 6)
-              // );
-              // var twelveMonthsLater = new Date(
-              //   lastMonthDate.setMonth(lastMonthDate.getMonth() + 6)
-              // );
-
-              // // Ay isimlerini ve yılları hesaplayın
-              // var sixMonthsLaterName =
-              //   monthNames[sixMonthsLater.getMonth()] +
-              //   " " +
-              //   sixMonthsLater.getFullYear();
-              // var twelveMonthsLaterName =
-              //   monthNames[twelveMonthsLater.getMonth()] +
-              //   " " +
-              //   twelveMonthsLater.getFullYear();
-
-              // // Ay isimlerini ve tahmini perform
-              // ansları grafiğe ekleyin
-              // myChart.data.labels.push(
-              //   sixMonthsLaterName,
-              //   twelveMonthsLaterName
-              // );
               myChart.data.datasets[0].data = data.map(
                 (entry) => entry.avg_sales
               );
@@ -397,7 +354,7 @@
         // Verileri tanımlayın
         var months = ["ocak", "şubat", "mart", "nisan", "mayıs", "haziran"];
 
-        // Chart.js ile çizgi grafiği oluşturma
+        // Chart.js ile çizgi grafiği oluştur
         var ctx = document.getElementById("salesalti").getContext("2d");
         var myChart = new Chart(ctx, {
           type: "line",
@@ -449,34 +406,7 @@
                 "Kasım",
                 "Aralık",
               ];
-              // var lastMonthNumber = monthNames.indexOf(lastMonth);
-              // var lastMonthYear = data.u_mayis_24 ? 2024 : 2023; // Veritabanından gelen yılı alın
-              // var lastMonthDate = new Date(lastMonthYear, lastMonthNumber);
 
-              // // En son aydan 6 ve 12 ay sonrasını hesaplayın
-              // var sixMonthsLater = new Date(
-              //   lastMonthDate.setMonth(lastMonthDate.getMonth() + 6)
-              // );
-              // var twelveMonthsLater = new Date(
-              //   lastMonthDate.setMonth(lastMonthDate.getMonth() + 6)
-              // );
-
-              // // Ay isimlerini ve yılları hesaplayın
-              // var sixMonthsLaterName =
-              //   monthNames[sixMonthsLater.getMonth()] +
-              //   " " +
-              //   sixMonthsLater.getFullYear();
-              // var twelveMonthsLaterName =
-              //   monthNames[twelveMonthsLater.getMonth()] +
-              //   " " +
-              //   twelveMonthsLater.getFullYear();
-
-              // // Ay isimlerini ve tahmini perform
-              // ansları grafiğe ekleyin
-              // myChart.data.labels.push(
-              //   sixMonthsLaterName,
-              //   twelveMonthsLaterName
-              // );
               myChart.data.datasets[0].data = data.map(
                 (entry) => entry.avg_sales
               );
@@ -527,7 +457,6 @@
               $("#notificationCount").text(notificationCount);
 
               // Accordion'u aç
-              // $("#collapseOne").addClass("show");
             },
             error: function (error) {
               console.error("Stok azalan ürünleri getirme hatası:", error);

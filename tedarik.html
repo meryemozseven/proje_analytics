@@ -55,8 +55,8 @@
     />
     <style>
       .wrapper {
-        margin-top: 56px; /* Navbar yüksekliği kadar boşluk bırak */
-        margin-left: 400px; /* Sidebar genişliği kadar boşluk bırak */
+        margin-top: 56px; 
+        margin-left: 400px; 
         width: 2000px;
       }
       #bellButton {
@@ -266,6 +266,22 @@
                     <th>tel_num</th>
                     <th>teslim_suresi</th>
                     <th>kalite_denetimi</th>
+                    <th>
+                      <button
+                        class="btn btn-primary"
+                        onclick="guncelleTedarikci(${item.tedarikci_id})"
+                      >
+                        Güncelle
+                      </button>
+                    </th>
+                    <th>
+                      <button
+                        class="btn btn-danger"
+                        onclick="silTedarikci(${item.tedarikci_id})"
+                      >
+                        Sil
+                      </button>
+                    </th>
                   </tr>
                 </thead>
                 <tbody id="urunlerTableBody">
@@ -315,20 +331,17 @@
           });
         }
 
-        // Call the function to fetch and display data
+      
         tedarikciGetir();
 
-        // Enable Bootstrap tooltips and popovers
+
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="popover"]').popover();
 
-        // Enable Bootstrap dropdowns
+      
         $(".heh").dropdown();
 
-        // Enable sidebar toggling
-        // $('[data-widget="pushmenu"]').on('click', function () {
-        //     $("body").toggleClass('sidebar-collapse');
-        // });
+    
       });
     </script>
 
@@ -371,7 +384,7 @@
               $("#notificationCount").text(notificationCount);
 
               // Accordion'u aç
-              // $("#collapseOne").addClass("show");
+            
             },
             error: function (error) {
               console.error("Stok azalan ürünleri getirme hatası:", error);

@@ -14,8 +14,8 @@ app.use(cors());
 //////
 app.use(
   express.json({ extended: true, limit: "50mb", parameterLimit: 500000 })
-); // json formatında gelen verileri okumak için kullanılır.
-app.use("/api", router); // api yolunu kullanmak için kullanılır.
+); // json formatında gelen verileri okumak
+app.use("/api", router); // api yolu
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

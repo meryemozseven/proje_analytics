@@ -1,4 +1,4 @@
-const router = require('express').Router(); // express router modülünü dahil eder.
-const routes = require('./routes'); // routes dosyasını dahil eder.
-router.use(routes) // routes dosyasını kullanmak için kullanılır.
-module.exports = router; // router dosyasını dışarıya aktarır.
+const router = require("express").Router(); // express router modülü
+const routes = require("./routes"); // routes dosyası
+router.use(routes); // routes dosyası
+module.exports = router; // router dosyası

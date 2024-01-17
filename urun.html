@@ -55,8 +55,8 @@
     />
     <style>
       .wrapper {
-        margin-top: 56px; /* Navbar yüksekliği kadar boşluk bırak */
-        margin-left: 400px; /* Sidebar genişliği kadar boşluk bırak */
+        margin-top: 56px;
+        margin-left: 400px;
         width: 2000px;
       }
       #bellButton {
@@ -142,18 +142,6 @@
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
-      <!-- <a href="index3.html" class="brand-link">
-              <img
-                src="dist/img/AdminLTELogo.png"
-                alt="AdminLTE Logo"
-                class="brand-image img-circle elevation-3"
-                style="opacity: 0.8"
-              />
-              <span class="brand-text font-weight-light">AdminLTE 3</span>
-            </a> -->
-
-      <!-- Sidebar -->
       <div class="sidebar">
         <div>
           <h1 style="margin: 10px">
@@ -200,8 +188,6 @@
             data-widget="treeview"
             role="menu"
           >
-            <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
               <a href="index.html" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -268,9 +254,7 @@
                     <th>ÜRÜN FİYATI</th>
                   </tr>
                 </thead>
-                <tbody id="urunlerTableBody">
-                  <!-- Tablo verileri buraya eklenecek -->
-                </tbody>
+                <tbody id="urunlerTableBody"></tbody>
               </table>
             </div>
           </div>
@@ -286,10 +270,8 @@
             dataType: "json",
             success: function (response) {
               if (Array.isArray(response) && response.length > 0) {
-                // Clear existing table rows
                 $("#urunlerTableBody").empty();
 
-                // Append new rows
                 $.each(response, function (index, item) {
                   var row = `<tr>
                                 <th>${item.urun_id}</th>
@@ -314,25 +296,16 @@
           });
         }
 
-        // Call the function to fetch and display data
         urunleriGetir();
 
-        // Enable Bootstrap tooltips and popovers
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="popover"]').popover();
 
-        // Enable Bootstrap dropdowns
         $(".heh").dropdown();
-
-        // Enable sidebar toggling
-        // $('[data-widget="pushmenu"]').on('click', function () {
-        //     $("body").toggleClass('sidebar-collapse');
-        // });
       });
     </script>
     <script>
       $(document).ready(function () {
-        // Bell ikonuna tıklama olayını dinle
         $("#bellButton").on("click", function () {
           // Accordion'u açıp/kapat
           $("#collapseOne").collapse("toggle");
@@ -369,7 +342,6 @@
               $("#notificationCount").text(notificationCount);
 
               // Accordion'u aç
-              // $("#collapseOne").addClass("show");
             },
             error: function (error) {
               console.error("Stok azalan ürünleri getirme hatası:", error);

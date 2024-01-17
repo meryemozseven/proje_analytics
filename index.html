@@ -47,19 +47,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-      /* Genel stil kuralları */
-
       .accordion {
-        margin-bottom: 0; /* Accordion'un altındaki boşluğu kaldır */
+        margin-bottom: 0;
         color: #fff;
       }
 
-      /* Düzeltilmiş bildirim ikonu ve sayısı */
-
       #map {
-        /* margin-left: 600px;
-        width: 800px;
-        height: 400px; */
         background-color: black;
       }
 
@@ -91,12 +84,9 @@
             type: "GET",
             dataType: "json",
             success: function (response) {
-              // Check if the response is an array with at least one element
               if (Array.isArray(response) && response.length > 0) {
-                // Access the first element of the array
                 var firstElement = response[0];
 
-                // Check if tedarikci_sayisi property exists in the first element
                 if (firstElement.categoryCount !== undefined) {
                   $("#categoriSayi").text(firstElement.categoryCount);
                 } else {
@@ -123,12 +113,9 @@
             type: "GET",
             dataType: "json",
             success: function (response) {
-              // Check if the response is an array with at least one element
               if (Array.isArray(response) && response.length > 0) {
-                // Access the first element of the array
                 var firstElement = response[0];
 
-                // Check if tedarikci_sayisi property exists in the first element
                 if (firstElement.productCount !== undefined) {
                   $("#productSayi").text(firstElement.productCount);
                 } else {
@@ -155,12 +142,9 @@
             type: "GET",
             dataType: "json",
             success: function (response) {
-              // Check if the response is an array with at least one element
               if (Array.isArray(response) && response.length > 0) {
-                // Access the first element of the array
                 var firstElement = response[0];
 
-                // Check if tedarikci_sayisi property exists in the first element
                 if (firstElement.satisCount !== undefined) {
                   $("#satisSayi").text(firstElement.satisCount);
                 } else {
@@ -187,12 +171,9 @@
             type: "GET",
             dataType: "json",
             success: function (response) {
-              // Check if the response is an array with at least one element
               if (Array.isArray(response) && response.length > 0) {
-                // Access the first element of the array
                 var firstElement = response[0];
 
-                // Check if tedarikci_sayisi property exists in the first element
                 if (firstElement.userCount !== undefined) {
                   $("#userSayi").text(firstElement.userCount);
                 } else {
@@ -293,13 +274,12 @@
             ></a>
           </li>
         </ul>
-        <!-- tjlarge -->
+
         <script>
-          // Bu kodu ekleyin
           $(document).ready(function () {
             $("#openEnvanterPage").on("click", function (e) {
-              e.preventDefault(); // Varsayılan tıklama davranışını engelle
-              window.location.href = "envanter.html"; // Yeni sayfaya yönlendir
+              e.preventDefault();
+              window.location.href = "envanter.html";
             });
           });
         </script>
@@ -308,25 +288,13 @@
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
-      <!-- <a href="index3.html" class="brand-link">
-            <img
-              src="dist/img/AdminLTELogo.png"
-              alt="AdminLTE Logo"
-              class="brand-image img-circle elevation-3"
-              style="opacity: 0.8"
-            />
-            <span class="brand-text font-weight-light">AdminLTE 3</span>
-          </a> -->
-
-      <!-- Sidebar -->
       <div class="sidebar">
         <div>
           <h1 style="margin: 10px; color: #fff">
             <span style="color: rgb(255, 157, 0)">Dash</span>board
           </h1>
         </div>
-        <!-- Sidebar user panel (optional) -->
+
         <form class="form-inline">
           <div class="input-group">
             <input
@@ -365,8 +333,6 @@
             data-widget="treeview"
             role="menu"
           >
-            <!-- Add icons to the links using the .nav-icon class
-                   with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -419,10 +385,6 @@
       class="row"
       style="width: 1100px; margin-left: 300px; margin-top: 20px"
     >
-      <!-- index.html -->
-
-      <!-- index.html -->
-
       <div class="col-md-3">
         <div class="small-box bg-info">
           <div class="inner">
@@ -798,7 +760,6 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Verileri tanımlayın
         var months = ["Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
 
         // Chart.js ile çizgi grafiği oluşturma
@@ -858,12 +819,9 @@
             dataType: "json",
             success: function (response) {
               if (Array.isArray(response) && response.length > 0) {
-                // Clear existing table rows
                 $("#urunlerTableBody").empty();
 
-                // Append new rows
                 $.each(response, function (index, item) {
-                  // Determine arrow color and direction based on stok_miktari
                   var arrowClass, arrowDirection;
                   if (item.stok_miktari < 1000) {
                     arrowClass = "text-danger";
@@ -906,28 +864,22 @@
           });
         }
 
-        // Call the function to fetch and display data
         envanterGetir();
 
-        // Enable Bootstrap tooltips and popovers
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="popover"]').popover();
 
-        // Enable Bootstrap dropdowns
         $(".heh").dropdown();
 
-        // Enable sidebar toggling
         $('[data-widget="pushmenu"]').on("click", function () {
           $("body").toggleClass("sidebar-collapse");
         });
 
-        // Bell ikonuna tıklama olayını dinle
         $("#bellButton").on("click", function () {
           // Accordion'u açıp/kapat
           $("#collapseOne").collapse("toggle");
         });
 
-        // Accordion başlığına tıklama olayını dinle
         $("#accordionHeader").on("click", function () {
           // Accordion'u kapat
           $("#collapseOne").collapse("hide");
@@ -956,7 +908,6 @@
               $("#notificationCount").text(notificationCount);
 
               // Accordion'u aç
-              // $("#collapseOne").addClass("show");
             },
             error: function (error) {
               console.error("Stok azalan ürünleri getirme hatası:", error);

@@ -97,7 +97,6 @@
         </form>
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-          <!-- Notifications Dropdown Menu -->
           <li class="nav-item">
             <div class="accordion">
               <div class="accordion-item">
@@ -137,17 +136,6 @@
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
-      <!-- <a href="index3.html" class="brand-link">
-              <img
-                src="dist/img/AdminLTELogo.png"
-                alt="AdminLTE Logo"
-                class="brand-image img-circle elevation-3"
-                style="opacity: 0.8"
-              />
-              <span class="brand-text font-weight-light">AdminLTE 3</span>
-            </a> -->
-
       <!-- Sidebar -->
       <div class="sidebar">
         <div>
@@ -156,7 +144,7 @@
             ><span style="color: white">board</span>
           </h1>
         </div>
-        <!-- Sidebar user panel (optional) -->
+
         <form class="form-inline">
           <div class="input-group">
             <input
@@ -195,8 +183,6 @@
             data-widget="treeview"
             role="menu"
           >
-            <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
               <a href="index.html" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -257,8 +243,6 @@
     </div>
 
     <div class="row" style="margin-left: 340px; margin-right: 80px">
-      <!-- ... (diğer HTML kodları) ... -->
-
       <div class="col-6">
         <select id="salesIncreaseSelect" onchange="updateChart()">
           <option value="normal">Normal Sales</option>
@@ -296,7 +280,6 @@
         } else if (selectedValue === "decreaseon") {
           window.location.href = "yuzdeonaz.html";
         }
-        // Normal satış seçeneği için başka bir işlem yapmak isterseniz buraya ekleyebilirsiniz.
       }
     </script>
 
@@ -306,10 +289,10 @@
       ///for ajax
 
       document.addEventListener("DOMContentLoaded", function () {
-        // Verileri tanımlayın
+        // Verileri tanımla
         var months = ["ocak", "şubat", "mart", "nisan", "mayıs", "haziran"];
 
-        // Chart.js ile çizgi grafiği oluşturma
+        // Chart.js ile çizgi grafiği oluştur
         var ctx = document.getElementById("salesChart").getContext("2d");
         var myChart = new Chart(ctx, {
           type: "line",
@@ -318,7 +301,7 @@
             datasets: [
               {
                 label: "Sayılar",
-                data: [], // Verileri burada boş bırakıyoruz ve AJAX isteği ile dolduracağız
+                data: [], // Verileri burada boş bırakıyoruz ve AJAX isteği ile doldur
                 backgroundColor: "rgba(54, 162, 235, 0.2)", // Arkaplan rengi (isteğe bağlı)
                 borderColor: "rgba(54, 162, 235, 1)", // Çizgi rengi
                 borderWidth: 2,
@@ -343,10 +326,10 @@
             if (response.success) {
               var data = response.data;
 
-              // Veritabanından gelen en son ayı alın
+              // Veritabanından gelen en son ayı al
               var lastMonth = months[months.length - 1]; // Örneğin: "Mayıs"
 
-              // En son ayı bir Date nesnesine dönüştürün
+              // En son ayı bir Date nesnesine dönüştür
               var monthNames = [
                 "Ocak",
                 "Şubat",
@@ -374,7 +357,7 @@
       ///9ay
 
       document.addEventListener("DOMContentLoaded", function () {
-        // Verileri tanımlayın
+        // Verileri tanımla
         var months = [
           "ocak",
           "şubat",
@@ -421,10 +404,10 @@
             if (response.success) {
               var data = response.data;
 
-              // Veritabanından gelen en son ayı alın
+              // Veritabanından gelen en son ayı al
               var lastMonth = months[months.length - 1]; // Örneğin: "Mayıs"
 
-              // En son ayı bir Date nesnesine dönüştürün
+              // En son ayı bir Date nesnesine dönüştür
               var monthNames = [
                 "Ocak",
                 "Şubat",
@@ -518,34 +501,7 @@
                 "Kasım",
                 "Aralık",
               ];
-              // var lastMonthNumber = monthNames.indexOf(lastMonth);
-              // var lastMonthYear = data.u_mayis_24 ? 2024 : 2023; // Veritabanından gelen yılı alın
-              // var lastMonthDate = new Date(lastMonthYear, lastMonthNumber);
 
-              // // En son aydan 6 ve 12 ay sonrasını hesaplayın
-              // var sixMonthsLater = new Date(
-              //   lastMonthDate.setMonth(lastMonthDate.getMonth() + 6)
-              // );
-              // var twelveMonthsLater = new Date(
-              //   lastMonthDate.setMonth(lastMonthDate.getMonth() + 6)
-              // );
-
-              // // Ay isimlerini ve yılları hesaplayın
-              // var sixMonthsLaterName =
-              //   monthNames[sixMonthsLater.getMonth()] +
-              //   " " +
-              //   sixMonthsLater.getFullYear();
-              // var twelveMonthsLaterName =
-              //   monthNames[twelveMonthsLater.getMonth()] +
-              //   " " +
-              //   twelveMonthsLater.getFullYear();
-
-              // // Ay isimlerini ve tahmini perform
-              // ansları grafiğe ekleyin
-              // myChart.data.labels.push(
-              //   sixMonthsLaterName,
-              //   twelveMonthsLaterName
-              // );
               myChart.data.datasets[0].data = data.map(
                 (entry) => entry.avg_sales
               );
@@ -761,7 +717,6 @@
               $("#notificationCount").text(notificationCount);
 
               // Accordion'u aç
-              // $("#collapseOne").addClass("show");
             },
             error: function (error) {
               console.error("Stok azalan ürünleri getirme hatası:", error);

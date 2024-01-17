@@ -137,18 +137,6 @@
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
-      <!-- <a href="index3.html" class="brand-link">
-              <img
-                src="dist/img/AdminLTELogo.png"
-                alt="AdminLTE Logo"
-                class="brand-image img-circle elevation-3"
-                style="opacity: 0.8"
-              />
-              <span class="brand-text font-weight-light">AdminLTE 3</span>
-            </a> -->
-
-      <!-- Sidebar -->
       <div class="sidebar">
         <div>
           <h1 style="margin: 10px">
@@ -195,8 +183,6 @@
             data-widget="treeview"
             role="menu"
           >
-            <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
               <a href="index.html" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -250,8 +236,6 @@
         class="row"
         style="margin-left: 340px; margin-right: 80px; margin-top: 50px"
       >
-        <!-- ... (diğer HTML kodları) ... -->
-
         <div class="col-6">
           <select id="salesIncreaseSelect" onchange="updateChart()">
             <option value="normal">Normal Sales</option>
@@ -276,11 +260,9 @@
         var selectElement = document.getElementById("salesIncreaseSelect");
         var selectedValue = selectElement.value;
 
-        // Kontrol et ve yönlendir
         if (selectedValue === "increase") {
           window.location.href = "fazla.html";
         } else {
-          // Diğer durumlar için gerekli işlemleri yapabilirsiniz
         }
       }
     </script>
@@ -290,13 +272,10 @@
         var selectedValue = selectElement.value;
 
         if (selectedValue === "increase") {
-          // Yönlendirme kodu - Eğer başka bir sayfa varsa onun URL'sini kullanın
           window.location.href = "fazla.html";
         } else if (selectedValue === "decrease") {
-          // Başka bir sayfaya yönlendirme kodu - Eğer başka bir sayfa varsa onun URL'sini kullanın
           window.location.href = "az.html";
         }
-        // Normal satış seçeneği için başka bir işlem yapmak isterseniz buraya ekleyebilirsiniz.
       }
     </script>
 
@@ -340,10 +319,8 @@
             if (response.success) {
               var data = response.data;
 
-              // Veritabanından gelen en son ayı alın
               var lastMonth = months[months.length - 1]; // Örneğin: "Mayıs"
 
-              // En son ayı bir Date nesnesine dönüştürün
               var monthNames = [
                 "Ocak",
                 "Şubat",
@@ -371,7 +348,7 @@
     </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Verileri tanımlayın
+        // Verileri tanımla
         var months = [
           "ocak",
           "şubat",
@@ -418,10 +395,8 @@
             if (response.success) {
               var data = response.data;
 
-              // Veritabanından gelen en son ayı alın
               var lastMonth = months[months.length - 1]; // Örneğin: "Mayıs"
 
-              // En son ayı bir Date nesnesine dönüştürün
               var monthNames = [
                 "Ocak",
                 "Şubat",
@@ -487,7 +462,6 @@
               $("#notificationCount").text(notificationCount);
 
               // Accordion'u aç
-              // $("#collapseOne").addClass("show");
             },
             error: function (error) {
               console.error("Stok azalan ürünleri getirme hatası:", error);

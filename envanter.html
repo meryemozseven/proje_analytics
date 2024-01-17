@@ -142,18 +142,7 @@
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
-      <!-- <a href="index3.html" class="brand-link">
-              <img
-                src="dist/img/AdminLTELogo.png"
-                alt="AdminLTE Logo"
-                class="brand-image img-circle elevation-3"
-                style="opacity: 0.8"
-              />
-              <span class="brand-text font-weight-light">AdminLTE 3</span>
-            </a> -->
-
-      <!-- Sidebar -->
+  
       <div class="sidebar">
         <div>
           <h1 style="margin: 10px">
@@ -200,8 +189,7 @@
             data-widget="treeview"
             role="menu"
           >
-            <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
+   
             <li class="nav-item menu-open">
               <a href="index.html" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -269,7 +257,7 @@
                   </tr>
                 </thead>
                 <tbody id="urunlerTableBody">
-                  <!-- Tablo verileri buraya eklenecek -->
+                
                 </tbody>
               </table>
             </div>
@@ -291,7 +279,7 @@
 
                 // Append new rows
                 $.each(response, function (index, item) {
-                  // Determine arrow color and direction based on stok_miktari
+          
                   var arrowClass, arrowDirection;
                   if (item.stok_miktari < 1000) {
                     arrowClass = "text-danger";
@@ -334,17 +322,16 @@
           });
         }
 
-        // Call the function to fetch and display data
         envanterGetir();
 
-        // Enable Bootstrap tooltips and popovers
+      
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="popover"]').popover();
 
-        // Enable Bootstrap dropdowns
+        
         $(".heh").dropdown();
 
-        // Enable sidebar toggling
+  
         $('[data-widget="pushmenu"]').on("click", function () {
           $("body").toggleClass("sidebar-collapse");
         });
@@ -389,7 +376,7 @@
               $("#notificationCount").text(notificationCount);
 
               // Accordion'u aç
-              // $("#collapseOne").addClass("show");
+            
             },
             error: function (error) {
               console.error("Stok azalan ürünleri getirme hatası:", error);
