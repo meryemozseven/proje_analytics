@@ -28,10 +28,10 @@
     <canvas id="salesChart" width="800" height="400"></canvas>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Verileri tanımla
+        // Veriler
         var months = ["ocak", "şubat", "mart", "nisan", "mayıs", "haziran"];
 
-        // Chart.js ile çizgi grafiği oluştur
+        // çizgi grafiği(chartjs)
         var ctx = document.getElementById("salesChart").getContext("2d");
         var myChart = new Chart(ctx, {
           type: "line",
@@ -40,7 +40,7 @@
             datasets: [
               {
                 label: "Sayılar",
-                data: [], // Verileri burada boş bırak
+                data: [], // boş bırak
                 backgroundColor: "rgba(54, 162, 235, 0.2)", // Arkaplan rengi
                 borderColor: "rgba(54, 162, 235, 1)", // Çizgi rengi
                 borderWidth: 2,
@@ -57,7 +57,7 @@
             },
           },
         });
-        // AJAX isteği yapma
+        // AJAX isteği 
         $.ajax({
           url: "http://localhost:3000/api/tahminiSatis/",
           method: "GET",
@@ -65,10 +65,9 @@
             if (response.success) {
               var data = response.data;
 
-              // Veritabanından gelen en son ay
-              var lastMonth = months[months.length - 1]; // Örneğin: "Mayıs"
+              // en son ay
+              var lastMonth = months[months.length - 1]; 
 
-              // En son ayı bir Date nesnesine dönüştür
               var monthNames = [
                 "Ocak",
                 "Şubat",
@@ -88,7 +87,7 @@
                 (entry) => entry.avg_sales
               );
 
-              myChart.update(); // Grafiği güncelle
+              myChart.update(); 
             }
           },
         });
