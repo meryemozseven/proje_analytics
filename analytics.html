@@ -77,9 +77,9 @@
         <a href="index.html" class="navbar-brand">
           <span class="fa fa-home"> </span>
         </a>
-        <!-- Left navbar links -->
+    
 
-        <!-- SEARCH FORM -->
+        <!--  FORM -->
         <form class="form-inline ml-3">
           <div class="input-group input-group-sm">
             <input
@@ -95,7 +95,7 @@
             </div>
           </div>
         </form>
-        <!-- Right navbar links -->
+        <!-- Right navbar  -->
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <div class="accordion">
@@ -134,9 +134,9 @@
       </div>
     </nav>
     <!-- /.navbar -->
-    <!-- Main Sidebar Container -->
+    <!-- Main Sidebar  -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Sidebar -->
+
       <div class="sidebar">
         <div>
           <h1 style="margin: 10px">
@@ -176,7 +176,7 @@
           </div>
         </div>
 
-        <!-- Sidebar Menu -->
+        <!-- Sidebar  -->
         <nav class="mt-2">
           <ul
             class="nav nav-pills nav-sidebar flex-column"
@@ -289,10 +289,10 @@
       ///for ajax
 
       document.addEventListener("DOMContentLoaded", function () {
-        // Verileri tanımla
+        // Veriler
         var months = ["ocak", "şubat", "mart", "nisan", "mayıs", "haziran"];
 
-        // Chart.js ile çizgi grafiği oluştur
+        //çizgi grafiği oluştur
         var ctx = document.getElementById("salesChart").getContext("2d");
         var myChart = new Chart(ctx, {
           type: "line",
@@ -301,8 +301,8 @@
             datasets: [
               {
                 label: "Sayılar",
-                data: [], // Verileri burada boş bırakıyoruz ve AJAX isteği ile doldur
-                backgroundColor: "rgba(54, 162, 235, 0.2)", // Arkaplan rengi (isteğe bağlı)
+                data: [], // 
+                backgroundColor: "rgba(54, 162, 235, 0.2)", // Arkaplan rengi 
                 borderColor: "rgba(54, 162, 235, 1)", // Çizgi rengi
                 borderWidth: 2,
                 pointBackgroundColor: "rgba(54, 162, 235, 1)", // Nokta rengi
@@ -318,7 +318,7 @@
             },
           },
         });
-        // AJAX isteği yapma
+        // AJAX isteği 
         $.ajax({
           url: "http://localhost:3000/api/tahminiSatis/",
           method: "GET",
@@ -326,10 +326,10 @@
             if (response.success) {
               var data = response.data;
 
-              // Veritabanından gelen en son ayı al
+           
               var lastMonth = months[months.length - 1]; // Örneğin: "Mayıs"
 
-              // En son ayı bir Date nesnesine dönüştür
+      
               var monthNames = [
                 "Ocak",
                 "Şubat",
@@ -349,7 +349,7 @@
                 (entry) => entry.avg_sales
               );
 
-              myChart.update(); // Grafiği güncelle
+              myChart.update();
             }
           },
         });
@@ -357,7 +357,7 @@
       ///9ay
 
       document.addEventListener("DOMContentLoaded", function () {
-        // Verileri tanımla
+
         var months = [
           "ocak",
           "şubat",
@@ -370,7 +370,7 @@
           "eylül",
         ];
 
-        // Chart.js ile çizgi grafiği oluşturma
+        // çizgi grafiği oluşturma
         var ctx = document.getElementById("salestwoChart").getContext("2d");
         var myChart = new Chart(ctx, {
           type: "line",
@@ -379,8 +379,8 @@
             datasets: [
               {
                 label: "Sayılar",
-                data: [], // Verileri burada boş bırakıyoruz ve AJAX isteği ile dolduracağız
-                backgroundColor: "rgba(54, 162, 235, 0.2)", // Arkaplan rengi (isteğe bağlı)
+                data: [], // 
+                backgroundColor: "rgba(54, 162, 235, 0.2)", // Arkaplan rengi 
                 borderColor: "rgba(54, 162, 235, 1)", // Çizgi rengi
                 borderWidth: 2,
                 pointBackgroundColor: "rgba(54, 162, 235, 1)", // Nokta rengi
@@ -396,7 +396,7 @@
             },
           },
         });
-        // AJAX isteği yapma
+        // AJAX isteği 
         $.ajax({
           url: "http://localhost:3000/api/tahminiDokuzSatis/",
           method: "GET",
@@ -404,10 +404,10 @@
             if (response.success) {
               var data = response.data;
 
-              // Veritabanından gelen en son ayı al
+     
               var lastMonth = months[months.length - 1]; // Örneğin: "Mayıs"
 
-              // En son ayı bir Date nesnesine dönüştür
+      
               var monthNames = [
                 "Ocak",
                 "Şubat",
@@ -436,7 +436,7 @@
     </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Verileri tanımlayın
+        // Verileri tanımla
         var months = [
           "ocak",
           "şubat",
@@ -458,8 +458,8 @@
             datasets: [
               {
                 label: "Sayılar",
-                data: [], // Verileri burada boş bırakıyoruz ve AJAX isteği ile dolduracağız
-                backgroundColor: "rgba(54, 162, 235, 0.2)", // Arkaplan rengi (isteğe bağlı)
+                data: [], // 
+                backgroundColor: "rgba(54, 162, 235, 0.2)", // Arkaplan
                 borderColor: "rgba(54, 162, 235, 1)", // Çizgi rengi
                 borderWidth: 2,
                 pointBackgroundColor: "rgba(54, 162, 235, 1)", // Nokta rengi
@@ -483,10 +483,9 @@
             if (response.success) {
               var data = response.data;
 
-              // Veritabanından gelen en son ayı alın
               var lastMonth = months[months.length - 1]; // Örneğin: "Mayıs"
 
-              // En son ayı bir Date nesnesine dönüştürün
+        
               var monthNames = [
                 "Ocak",
                 "Şubat",
@@ -514,11 +513,11 @@
     </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Chart.js ile pie chart oluşturma
+  
         var ctx = document.getElementById("azsatan").getContext("2d");
         var azsatan;
 
-        // AJAX isteği yapma
+
         $.ajax({
           url: "http://localhost:3000/api/azsatan",
           method: "GET",
@@ -526,23 +525,23 @@
             if (response.success) {
               var data = response.data;
 
-              // Pie chart için veri hazırlığı
+        
               var labels = [];
               var dataValues = [];
               var backgroundColors = [];
 
-              // Only keep the first 5 items, group the rest into 'other'
+        
               var slicedData = data.slice(0, 5);
               var otherData = data.slice(5);
 
               slicedData.forEach((entry) => {
                 labels.push(entry.urun_adi);
                 dataValues.push(entry.toplam_miktar);
-                // Assign a different color for each 'aciklama'
+      
                 backgroundColors.push(getRandomColor());
               });
 
-              // Group 'other'
+  
               if (otherData.length > 0) {
                 var otherTotal = otherData.reduce(
                   (acc, entry) => acc + entry.toplam_miktar,
@@ -553,15 +552,15 @@
                 backgroundColors.push(getRandomColor());
               }
 
-              // Oluşturulan pie chart'ın kontrolünü sağlama
+       
               if (azsatan) {
-                // Eğer chart varsa, verileri güncelle
+          
                 azsatan.data.labels = labels;
                 azsatan.data.datasets[0].data = dataValues;
                 azsatan.data.datasets[0].backgroundColor = backgroundColors;
                 azsatan.update();
               } else {
-                // Eğer chart yoksa, yeni bir pie chart oluştur
+             
                 azsatan = new Chart(ctx, {
                   type: "pie",
                   data: {
@@ -597,11 +596,11 @@
     </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Chart.js ile pie chart oluşturma
+
         var ctx = document.getElementById("myPieChart").getContext("2d");
         var myPieChart;
 
-        // AJAX isteği yapma
+
         $.ajax({
           url: "http://localhost:3000/api/pieChartVeriGetir",
           method: "GET",
@@ -609,23 +608,21 @@
             if (response.success) {
               var data = response.data;
 
-              // Pie chart için veri hazırlığı
               var labels = [];
               var dataValues = [];
               var backgroundColors = [];
 
-              // Only keep the first 5 items, group the rest into 'other'
               var slicedData = data.slice(0, 5);
               var otherData = data.slice(5);
 
               slicedData.forEach((entry) => {
                 labels.push(entry.urun_adi);
                 dataValues.push(entry.toplam_miktar);
-                // Assign a different color for each 'aciklama'
+         
                 backgroundColors.push(getRandomColor());
               });
 
-              // Group 'other'
+       
               if (otherData.length > 0) {
                 var otherTotal = otherData.reduce(
                   (acc, entry) => acc + entry.toplam_miktar,
@@ -636,15 +633,15 @@
                 backgroundColors.push(getRandomColor());
               }
 
-              // Oluşturulan pie chart'ın kontrolünü sağlama
+          
               if (myPieChart) {
-                // Eğer chart varsa, verileri güncelle
+           
                 myPieChart.data.labels = labels;
                 myPieChart.data.datasets[0].data = dataValues;
                 myPieChart.data.datasets[0].backgroundColor = backgroundColors;
                 myPieChart.update();
               } else {
-                // Eğer chart yoksa, yeni bir pie chart oluştur
+              
                 myPieChart = new Chart(ctx, {
                   type: "pie",
                   data: {
@@ -680,25 +677,25 @@
     </script>
     <script>
       $(document).ready(function () {
-        // Bell ikonuna tıklama olayını dinle
+
         $("#bellButton").on("click", function () {
-          // Accordion'u açıp/kapat
+    
           $("#collapseOne").collapse("toggle");
         });
 
-        // Accordion başlığına tıklama olayını dinle
+     
         $("#accordionHeader").on("click", function () {
-          // Accordion'u kapat
+     
           $("#collapseOne").collapse("hide");
         });
       });
 
       $(document).ready(function () {
-        // Bell ikonuna tıklama olayını dinle
+  
         $("#bellButton").on("click", function () {
           // Stok azalan ürünleri accordion içine ekle
           $.ajax({
-            url: "http://localhost:3000/api/stokAz", // Değiştirilmesi gereken API endpoint'i
+            url: "http://localhost:3000/api/stokAz", 
             type: "GET",
             dataType: "json",
             success: function (response) {
